@@ -18,6 +18,9 @@
 				<div class="create-data-wrapper" @click="create_data">
 					<div class="create-data">生成拓扑图</div>
 				</div>
+				<div class="create-data-wrapper" @click="socket">
+					<div class="create-data">连接</div>
+				</div>
 			</div>
 			<div class="content-wrapper">
 				<div class="topo-wrapper">
@@ -228,7 +231,16 @@ export default {
 						}
 					}]
 				}
-			}
+			},
+			wsock: "",
+			PM: "",
+			AC: "",
+			AR1: "",
+			AR2: "",
+			PM_INFO: "",
+			AC_INFO: "",
+			AR1_INFO: "",
+			AR2_INFO: ""
 		};
 	},
 	methods: {
@@ -377,6 +389,61 @@ export default {
 			for(let create_edge=0;create_edge<this.con_data.connection.length;create_edge++){
 				this.con_edge_array[create_edge] = this.graph.createEdge(this.get_node(this.con_data.connection[create_edge].peers[0]),this.get_node(this.con_data.connection[create_edge].peers[1]));
 			}
+		},
+		socket() {
+			let netaddr = document.getElementById("addr_id");
+			let netport = document.getElementById("port_id");
+			console.log(this.wsock);
+			//this.wsock = new WebSocket('ws://'+netaddr.value+':'+netport.value, 'cube-wsport');
+			this.wsock = new WebSocket('ws://192.168.1.50:15999', 'cube-wsport');
+			let self=this;
+			self.wsock.onopen = function(e) {
+				alert("连接成功！");
+				self.graph = new Q.Graph('canvas');
+				self.PM = self.graph.createNode("PM", -100, -200);
+				self.PM.image = 'Q-server';
+			};
+			self.wsock.onclose = function(e) {
+				alert("onclose");
+			};
+			self.wsock.onerror = function(e) {
+				alert("error");
+			};
+			self.wsock.onmessage = function(e) {
+				alert("I have a message");
+				let msg;
+				msg = e.data;
+				console.log(msg);
+				if(msg.replace(/(^s*)|(s*$)/g, "").length != 0){
+					msg = JSON.parse(msg);
+					console.log(msg);
+					if(msg.RECORD[0].type=="PM") {
+						self.PM_INFO = msg.RECORD[0];
+						console.log(self.PM_INFO);
+					}
+					else if(msg.RECORD[0].type=="AC") {
+						self.AC_INFO = msg.RECORD[0];
+						self.AC = self.graph.createNode("AC", -100, -100);
+						self.edge1 = self.graph.createEdge(self.PM,self.AC,"");
+						self.AC.image = 'Q-exchanger2';
+						console.log(self.AC_INFO);
+					}
+					else if(msg.RECORD[0].type=="AR") {
+						if(self.AR1_INFO == "") {
+							self.AR1_INFO = msg.RECORD[0];
+							self.AR1 = self.graph.createNode("AR1", -150, 0);
+							self.edge2 = self.graph.createEdge(self.AC,self.AR1,"");
+							console.log("AR1");
+						}
+						if(self.AR1_INFO.machine_uuid != msg.RECORD[0].machine_uuid) {
+							self.AR2_INFO = msg.RECORD[0];
+							self.AR2 = self.graph.createNode("AR2", -50, 0);
+							self.edge3 = self.graph.createEdge(self.AC,self.AR2,"");
+							console.log("AR2");
+						}
+					}
+				}
+			};
 		}
 	}
 };
