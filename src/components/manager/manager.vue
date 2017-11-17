@@ -245,83 +245,113 @@ export default {
 	},
 	methods: {
 		creat() {
-			let graph = new Q.Graph('canvas');
-			let manager_center = graph.createNode("Manager Center", 0, -100);
-			let wired_switch = graph.createNode("Wired Network", -100, -50);
-			let wireless_switch = graph.createNode("Wireless Network", 100, -50);
-			let wired_device1 = graph.createNode("wired1", -170, 50);
-			let wired_device2 = graph.createNode("wired2", -100, 50);
-			this.wired_device3 = graph.createNode("wired3", -30, 50);
-			let wireless_device1 = graph.createNode("wireless1", 30, 50);
-			let wireless_device2 = graph.createNode("wireless2", 100, 50);
-			let wireless_device3 = graph.createNode("wireless3", 170, 50);
-			manager_center.image = 'Q-server';
-			wired_switch.image = 'Q-exchanger2';
-			wireless_switch.image = 'Q-exchanger2';
-			this.edge1 = graph.createEdge(manager_center,wired_switch,"");
-			this.edge1.setStyle(Q.Styles.EDGE_COLOR, this.color1);
-			this.edge1.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
-			this.edge1.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
-			this.edge2 = graph.createEdge(manager_center,wireless_switch,"");
-			this.edge2.setStyle(Q.Styles.EDGE_COLOR, this.color1);
-			this.edge2.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
-			this.edge2.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
-			this.edge3 = graph.createEdge(wired_switch,wired_device1,"");
-			this.edge3.setStyle(Q.Styles.EDGE_COLOR, this.color1);
-			this.edge3.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
-			this.edge3.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
-			this.edge4 = graph.createEdge(wired_switch,wired_device2,"");
-			this.edge4.setStyle(Q.Styles.EDGE_COLOR, this.color1);
-			this.edge4.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
-			this.edge4.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
-			this.edge5 = graph.createEdge(wired_switch,this.wired_device3,"");
-			this.edge5.setStyle(Q.Styles.EDGE_COLOR, this.color1);
-			this.edge5.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
-			this.edge5.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
-			this.edge6 = graph.createEdge(wireless_switch,wireless_device1,"");
-			this.edge6.setStyle(Q.Styles.EDGE_COLOR, this.color1);
-			this.edge6.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
-			this.edge6.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
-			this.edge7 = graph.createEdge(wireless_switch,wireless_device2,"");
-			this.edge7.setStyle(Q.Styles.EDGE_COLOR, this.color1);
-			this.edge7.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
-			this.edge7.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
-			this.edge8 = graph.createEdge(wireless_switch,wireless_device3,"");
-			this.edge8.setStyle(Q.Styles.EDGE_COLOR, this.color1);
-			this.edge8.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
-			this.edge8.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
+			// let graph = new Q.Graph('canvas');
+			// let manager_center = graph.createNode("Manager Center", 0, -100);
+			// let wired_switch = graph.createNode("Wired Network", -100, -50);
+			// let wireless_switch = graph.createNode("Wireless Network", 100, -50);
+			// let wired_device1 = graph.createNode("wired1", -170, 50);
+			// let wired_device2 = graph.createNode("wired2", -100, 50);
+			// this.wired_device3 = graph.createNode("wired3", -30, 50);
+			// let wireless_device1 = graph.createNode("wireless1", 30, 50);
+			// let wireless_device2 = graph.createNode("wireless2", 100, 50);
+			// let wireless_device3 = graph.createNode("wireless3", 170, 50);
+			// manager_center.image = 'Q-server';
+			// wired_switch.image = 'Q-exchanger2';
+			// wireless_switch.image = 'Q-exchanger2';
+			// this.edge1 = graph.createEdge(manager_center,wired_switch,"");
+			// this.edge1.setStyle(Q.Styles.EDGE_COLOR, this.color1);
+			// this.edge1.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
+			// this.edge1.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
+			// this.edge2 = graph.createEdge(manager_center,wireless_switch,"");
+			// this.edge2.setStyle(Q.Styles.EDGE_COLOR, this.color1);
+			// this.edge2.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
+			// this.edge2.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
+			// this.edge3 = graph.createEdge(wired_switch,wired_device1,"");
+			// this.edge3.setStyle(Q.Styles.EDGE_COLOR, this.color1);
+			// this.edge3.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
+			// this.edge3.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
+			// this.edge4 = graph.createEdge(wired_switch,wired_device2,"");
+			// this.edge4.setStyle(Q.Styles.EDGE_COLOR, this.color1);
+			// this.edge4.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
+			// this.edge4.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
+			// this.edge5 = graph.createEdge(wired_switch,this.wired_device3,"");
+			// this.edge5.setStyle(Q.Styles.EDGE_COLOR, this.color1);
+			// this.edge5.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
+			// this.edge5.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
+			// this.edge6 = graph.createEdge(wireless_switch,wireless_device1,"");
+			// this.edge6.setStyle(Q.Styles.EDGE_COLOR, this.color1);
+			// this.edge6.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
+			// this.edge6.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
+			// this.edge7 = graph.createEdge(wireless_switch,wireless_device2,"");
+			// this.edge7.setStyle(Q.Styles.EDGE_COLOR, this.color1);
+			// this.edge7.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
+			// this.edge7.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
+			// this.edge8 = graph.createEdge(wireless_switch,wireless_device3,"");
+			// this.edge8.setStyle(Q.Styles.EDGE_COLOR, this.color1);
+			// this.edge8.setStyle(Q.Styles.EDGE_LINE_DASH, [2, 1]);
+			// this.edge8.setStyle(Q.Styles.ARROW_TO_LINE_DASH, [2, 1]);
 
-			var group = graph.createGroup("G");
-			group.addChild(wired_device1);
-			group.addChild(wired_device2);
-			group.setStyle(Q.Styles.GROUP_BACKGROUND_COLOR, Q.toColor(0xCCfcfb9b));
-			group.setStyle(Q.Styles.GROUP_BACKGROUND_GRADIENT, Q.Gradient.LINEAR_GRADIENT_HORIZONTAL);
-			group.setStyle(Q.Styles.GROUP_STROKE, 2);
-			group.setStyle(Q.Styles.GROUP_STROKE_STYLE, "#2898E0");
-			group.setStyle(Q.Styles.GROUP_STROKE_LINE_DASH, [3,2]);
+			// var group = graph.createGroup("G");
+			// group.addChild(wired_device1);
+			// group.addChild(wired_device2);
+			// group.setStyle(Q.Styles.GROUP_BACKGROUND_COLOR, Q.toColor(0xCCfcfb9b));
+			// group.setStyle(Q.Styles.GROUP_BACKGROUND_GRADIENT, Q.Gradient.LINEAR_GRADIENT_HORIZONTAL);
+			// group.setStyle(Q.Styles.GROUP_STROKE, 2);
+			// group.setStyle(Q.Styles.GROUP_STROKE_STYLE, "#2898E0");
+			// group.setStyle(Q.Styles.GROUP_STROKE_LINE_DASH, [3,2]);
 
-			var label2 = new Q.LabelUI();
-			label2.position = Q.Position.CENTER_TOP;
-			label2.anchorPosition = Q.Position.CENTER_BOTTOM;
-			label2.border = 1;
-			label2.padding = new Q.Insets(2, 5);
-			label2.showPointer = true;
-			label2.offsetY = -10;
-			label2.backgroundColor = "yellow";
-			label2.fontSize = 16;
-			label2.fontStyle = "italic 100";
-			this.wired_device3.addUI(label2, [{
-					property : "label2",
-					propertyType : Q.Consts.PROPERTY_TYPE_CLIENT,
-					bindingProperty : "data"
-				}, {
-					property : "label2.color",
-					propertyType : Q.Consts.PROPERTY_TYPE_CLIENT,
-					bindingProperty : "color"
-				}]);
-			this.wired_device3.set("label2", "another label");
-			this.wired_device3.set("label2.color", "#333");
-			this.wired_device3.set("label2","不安全");
+			// var label2 = new Q.LabelUI();
+			// label2.position = Q.Position.CENTER_TOP;
+			// label2.anchorPosition = Q.Position.CENTER_BOTTOM;
+			// label2.border = 1;
+			// label2.padding = new Q.Insets(2, 5);
+			// label2.showPointer = true;
+			// label2.offsetY = -10;
+			// label2.backgroundColor = "yellow";
+			// label2.fontSize = 16;
+			// label2.fontStyle = "italic 100";
+			// this.wired_device3.addUI(label2, [{
+			// 		property : "label2",
+			// 		propertyType : Q.Consts.PROPERTY_TYPE_CLIENT,
+			// 		bindingProperty : "data"
+			// 	}, {
+			// 		property : "label2.color",
+			// 		propertyType : Q.Consts.PROPERTY_TYPE_CLIENT,
+			// 		bindingProperty : "color"
+			// 	}]);
+			// this.wired_device3.set("label2", "another label");
+			// this.wired_device3.set("label2.color", "#333");
+			// this.wired_device3.set("label2","不安全");
+			let self=this;
+			self.graph = new Q.Graph('canvas');
+			self.PM = self.graph.createNode("PM", -100, -200);
+			self.PM.image = 'Q-server';
+			var circle = Q.Shapes.getShape(Q.Consts.SHAPE_CIRCLE, -30, -5, 60, 30);
+			var shape = new Q.ImageUI(circle);
+			shape.position = Q.Position.CENTER_MIDDLE;
+			shape.layoutByAnchorPoint = false;
+			shape.name = "A";
+			shape.lineWidth = 1;
+			shape.strokeStyle = "#000";
+			shape.fillColor = Q.toColor(0xCCFFFF00);
+			shape.zIndex = -1;
+			self.PM.addUI(shape);
+
+
+
+			self.AC = self.graph.createNode("AC", -100, -100);
+			self.AC.image = 'Q-exchanger2';
+			var circle = Q.Shapes.getShape(Q.Consts.SHAPE_CIRCLE, -30, -5, 60, 30);
+			var shape = new Q.ImageUI(circle);
+			shape.position = Q.Position.CENTER_MIDDLE;
+			shape.layoutByAnchorPoint = false;
+			shape.name = "A";
+			shape.lineWidth = 1;
+			shape.strokeStyle = "#000";
+			shape.fillColor = Q.toColor(0xFF0000);
+			shape.zIndex = -1;
+			self.AC.addUI(shape);
+			self.edge1 = self.graph.createEdge(self.PM,self.AC,"");
 		},
 		change_edge() {
 			this.edge1.setStyle(Q.Styles.EDGE_COLOR, "red");
@@ -400,8 +430,6 @@ export default {
 			self.wsock.onopen = function(e) {
 				alert("连接成功！");
 				self.graph = new Q.Graph('canvas');
-				self.PM = self.graph.createNode("PM", -100, -200);
-				self.PM.image = 'Q-server';
 			};
 			self.wsock.onclose = function(e) {
 				alert("onclose");
@@ -410,7 +438,7 @@ export default {
 				alert("error");
 			};
 			self.wsock.onmessage = function(e) {
-				alert("I have a message");
+				//alert("I have a message");
 				let msg;
 				msg = e.data;
 				console.log(msg);
@@ -418,26 +446,160 @@ export default {
 					msg = JSON.parse(msg);
 					console.log(msg);
 					if(msg.RECORD[0].type=="PM") {
+						if(self.PM_INFO == "") {
+							self.PM = self.graph.createNode("PM", -100, -200);
+							self.PM.image = 'Q-server';
+						}
 						self.PM_INFO = msg.RECORD[0];
+						var circle = Q.Shapes.getShape(Q.Consts.SHAPE_CIRCLE, -30, -5, 60, 30);
+						var shape = new Q.ImageUI(circle);
+						shape.position = Q.Position.CENTER_MIDDLE;
+						shape.layoutByAnchorPoint = false;
+						shape.name = "A";
+						shape.lineWidth = 1;
+						shape.strokeStyle = "#000";
+						switch(self.PM_INFO.peer_state) {
+							case "UNKNOWN":
+								shape.fillColor = Q.toColor(0x808080);//灰色
+								break;
+							case "LOGIN":
+								shape.fillColor = Q.toColor(0xFFFF00);//黄色
+								break;
+							case "LOGOUT":
+								shape.fillColor = Q.toColor(0x3333FF);//蓝色
+								break;
+							case "TRUST":
+								shape.fillColor = Q.toColor(0x66FF00);//绿色
+								break;
+							case "LOGFAIL":
+								shape.fillColor = Q.toColor(0xFF9900);//橙色
+								break;
+							case "VERIFYFAIL":
+								shape.fillColor = Q.toColor(0xFF0000);//红色
+								break;
+							default:
+								shape.fillColor = Q.toColor(0xFFFFF);//白色
+								break;
+						}
+						shape.zIndex = -1;
+						self.PM.addUI(shape);
 						console.log(self.PM_INFO);
 					}
 					else if(msg.RECORD[0].type=="AC") {
+						if(self.AC_INFO == "") {
+							self.AC = self.graph.createNode("AC", -100, -100);
+							self.AC.image = 'Q-exchanger2';
+							self.edge1 = self.graph.createEdge(self.PM,self.AC,"");
+						}
 						self.AC_INFO = msg.RECORD[0];
-						self.AC = self.graph.createNode("AC", -100, -100);
-						self.edge1 = self.graph.createEdge(self.PM,self.AC,"");
-						self.AC.image = 'Q-exchanger2';
+						var circle = Q.Shapes.getShape(Q.Consts.SHAPE_CIRCLE, -30, -5, 60, 30);
+						var shape = new Q.ImageUI(circle);
+						shape.position = Q.Position.CENTER_MIDDLE;
+						shape.layoutByAnchorPoint = false;
+						shape.name = "A";
+						shape.lineWidth = 1;
+						shape.strokeStyle = "#000";
+						switch(self.AC_INFO.peer_state) {
+							case "UNKNOWN":
+								shape.fillColor = Q.toColor(0x808080);//灰色
+								break;
+							case "LOGIN":
+								shape.fillColor = Q.toColor(0xFFFF00);//黄色
+								break;
+							case "LOGOUT":
+								shape.fillColor = Q.toColor(0x3333FF);//蓝色
+								break;
+							case "TRUST":
+								shape.fillColor = Q.toColor(0x66FF00);//绿色
+								break;
+							case "LOGFAIL":
+								shape.fillColor = Q.toColor(0xFF9900);//橙色
+								break;
+							case "VERIFYFAIL":
+								shape.fillColor = Q.toColor(0xFF0000);//红色
+								break;
+							default:
+								shape.fillColor = Q.toColor(0xFFFFF);//白色
+								break;
+						}
+						shape.zIndex = -1;
+						self.AC.addUI(shape);
 						console.log(self.AC_INFO);
 					}
 					else if(msg.RECORD[0].type=="AR") {
 						if(self.AR1_INFO == "") {
 							self.AR1_INFO = msg.RECORD[0];
 							self.AR1 = self.graph.createNode("AR1", -150, 0);
+							var circle = Q.Shapes.getShape(Q.Consts.SHAPE_CIRCLE, -30, -5, 60, 30);
+							var shape = new Q.ImageUI(circle);
+							shape.position = Q.Position.CENTER_MIDDLE;
+							shape.layoutByAnchorPoint = false;
+							shape.name = "A";
+							shape.lineWidth = 1;
+							shape.strokeStyle = "#000";
+							switch(self.AR1_INFO.peer_state) {
+								case "UNKNOWN":
+									shape.fillColor = Q.toColor(0x808080);//灰色
+									break;
+								case "LOGIN":
+									shape.fillColor = Q.toColor(0xFFFF00);//黄色
+									break;
+								case "LOGOUT":
+									shape.fillColor = Q.toColor(0x3333FF);//蓝色
+									break;
+								case "TRUST":
+									shape.fillColor = Q.toColor(0x66FF00);//绿色
+									break;
+								case "LOGFAIL":
+									shape.fillColor = Q.toColor(0xFF9900);//橙色
+									break;
+								case "VERIFYFAIL":
+									shape.fillColor = Q.toColor(0xFF0000);//红色
+									break;
+								default:
+									shape.fillColor = Q.toColor(0xFFFFF);//白色
+									break;
+							}
+							shape.zIndex = -1;
+							self.AR1.addUI(shape);
 							self.edge2 = self.graph.createEdge(self.AC,self.AR1,"");
 							console.log("AR1");
 						}
 						if(self.AR1_INFO.machine_uuid != msg.RECORD[0].machine_uuid) {
 							self.AR2_INFO = msg.RECORD[0];
 							self.AR2 = self.graph.createNode("AR2", -50, 0);
+							var circle = Q.Shapes.getShape(Q.Consts.SHAPE_CIRCLE, -30, -5, 60, 30);
+							var shape = new Q.ImageUI(circle);
+							shape.position = Q.Position.CENTER_MIDDLE;
+							shape.layoutByAnchorPoint = false;
+							shape.name = "A";
+							shape.lineWidth = 1;
+							shape.strokeStyle = "#000";
+							switch(self.AR2_INFO.peer_state) {
+								case "UNKNOWN":
+									shape.fillColor = Q.toColor(0x808080);//灰色
+									break;
+								case "LOGIN":
+									shape.fillColor = Q.toColor(0xFFFF00);//黄色
+									break;
+								case "LOGOUT":
+									shape.fillColor = Q.toColor(0x3333FF);//蓝色
+									break;
+								case "TRUST":
+									shape.fillColor = Q.toColor(0x66FF00);//绿色
+									break;
+								case "LOGFAIL":
+									shape.fillColor = Q.toColor(0xFF9900);//橙色
+									break;
+								case "VERIFYFAIL":
+									shape.fillColor = Q.toColor(0xFF0000);//红色
+									break;
+								default:
+									shape.fillColor = Q.toColor(0xFFFFF);//白色
+									break;
+							}
+							shape.zIndex = -1;
+							self.AR2.addUI(shape);
 							self.edge3 = self.graph.createEdge(self.AC,self.AR2,"");
 							console.log("AR2");
 						}
