@@ -530,6 +530,7 @@ export default {
 						if(self.AR1_INFO == "") {
 							self.AR1_INFO = msg.RECORD[0];
 							self.AR1 = self.graph.createNode("AR1", -150, 0);
+							self.edge2 = self.graph.createEdge(self.AC,self.AR1,"");
 							var circle = Q.Shapes.getShape(Q.Consts.SHAPE_CIRCLE, -30, -5, 60, 30);
 							var shape = new Q.ImageUI(circle);
 							shape.position = Q.Position.CENTER_MIDDLE;
@@ -562,8 +563,42 @@ export default {
 							}
 							shape.zIndex = -1;
 							self.AR1.addUI(shape);
-							self.edge2 = self.graph.createEdge(self.AC,self.AR1,"");
 							console.log("AR1");
+						}
+						if(msg.RECORD[0].machine_uuid === self.AR1_INFO.machine_uuid) {
+							self.AR1_INFO = msg.RECORD[0];
+							var circle = Q.Shapes.getShape(Q.Consts.SHAPE_CIRCLE, -30, -5, 60, 30);
+							var shape = new Q.ImageUI(circle);
+							shape.position = Q.Position.CENTER_MIDDLE;
+							shape.layoutByAnchorPoint = false;
+							shape.name = "A";
+							shape.lineWidth = 1;
+							shape.strokeStyle = "#000";
+							switch(self.AR1_INFO.peer_state) {
+								case "UNKNOWN":
+									shape.fillColor = Q.toColor(0x808080);//灰色
+									break;
+								case "LOGIN":
+									shape.fillColor = Q.toColor(0xFFFF00);//黄色
+									break;
+								case "LOGOUT":
+									shape.fillColor = Q.toColor(0x3333FF);//蓝色
+									break;
+								case "TRUST":
+									shape.fillColor = Q.toColor(0x66FF00);//绿色
+									break;
+								case "LOGFAIL":
+									shape.fillColor = Q.toColor(0xFF9900);//橙色
+									break;
+								case "VERIFYFAIL":
+									shape.fillColor = Q.toColor(0xFF0000);//红色
+									break;
+								default:
+									shape.fillColor = Q.toColor(0xFFFFF);//白色
+									break;
+							}
+							shape.zIndex = -1;
+							self.AR1.addUI(shape);
 						}
 						if(self.AR1_INFO.machine_uuid != msg.RECORD[0].machine_uuid) {
 							self.AR2_INFO = msg.RECORD[0];
